@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCSManager 实例详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #f5f6fa;
+            padding: 20px;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .instance-header {
+            margin-bottom: 20px;
+        }
+
+        .instance-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .instance-id {
+            font-size: 14px;
+            color: #95a5a6;
+            font-family: monospace;
+        }
+
+        .info-section {
+            margin-bottom: 20px;
+            padding: 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 10px 15px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #34495e;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            background: #f8f9fa;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            border-right: 1px solid #eee;
+        }
+
+        .info-item:nth-child(2n) {
+            border-right: none;
+        }
+
+        .info-item:last-child,
+        .info-item:nth-last-child(2) {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #7f8c8d;
+            margin-right: 10px;
+            font-size: 14px;
+            min-width: 70px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #2c3e50;
+            flex: 1;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: white;
+            background: #95a5a6;
+        }
+
+        .status-running {
+            background: #27ae60;
+        }
+
+        .status-stopped {
+            background: #c0392b;
+        }
+
+        .status-starting {
+            background: #f39c12;
+        }
+
+        .status-stopping {
+            background: #d35400;
+        }
+
+        .status-busy {
+            background: #8e44ad;
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: white;
+            background: #27ae60;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #95a5a6;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="instance-header">
+            <div class="instance-title">
+                <div class="instance-name"><%=instance.config.name%></div>
+                <div class="instance-id">ID: <%=instance.config.uuid%></div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="section-header">
+                <div class="section-title">📊 基本信息</div>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">类型</div>
+                    <div class="info-value">
+                        <span class="type-badge">
+                            <%=instance.config.type%>
+                        </span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">状态</div>
+                    <div class="info-value">
+                        <span class="status-badge <%=
+                            instance.status === 3 ? 'status-running' : 
+                            instance.status === 2 ? 'status-starting' :
+                            instance.status === 1 ? 'status-stopping' :
+                            instance.status === -1 ? 'status-busy' : 'status-stopped'
+                        %>">
+                            <%=instance.stateName%>
+                        </span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">启动次数</div>
+                    <div class="info-value"><%=instance.started%> 次</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">创建时间</div>
+                    <div class="info-value"><%=instance.config.createTime%></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="section-header">
+                <div class="section-title">💻 进程信息</div>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">CPU</div>
+                    <div class="info-value"><%=instance.process.cpu ? instance.process.cpu.toFixed(1) : '0'%>%</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">内存</div>
+                    <div class="info-value"><%=instance.process.memory ? (instance.process.memory / 1024 / 1024).toFixed(2) : '0'%>MB</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">运行时间</div>
+                    <div class="info-value"><%=instance.process.uptime ? `${Math.floor(instance.process.uptime / 3600)}小时${Math.floor((instance.process.uptime % 3600) / 60)}分钟` : '未运行'%></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">进程ID</div>
+                    <div class="info-value"><%=instance.process.pid || '未运行'%></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="section-header">
+                <div class="section-title">⚙️ 配置信息</div>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">启动命令</div>
+                    <div class="info-value"><%=instance.config.startCommand || '无'%></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">工作目录</div>
+                    <div class="info-value"><%=instance.config.cwd || '无'%></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">自动启动</div>
+                    <div class="info-value"><%=instance.config.eventTask?.autoStart ? '是' : '否'%></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">自动重启</div>
+                    <div class="info-value"><%=instance.config.eventTask?.autoRestart ? '是' : '否'%></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Generated by Yunzai-Bot MCSManager Plugin
+        </div>
+    </div>
+</body>
+</html>

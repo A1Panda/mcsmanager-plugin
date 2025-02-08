@@ -1,0 +1,18 @@
+{
+  "name": "mcsmanager-plugin",
+  "version": "4.2.2",
+  "description": "Minecraft Tool Box plugin for Yunzai-Bot",
+  "type": "module",
+  "imports": {
+    "#lib/*": "../../../lib/*",
+    "#components": "./components/index.js",
+    "#models": "./models/index.js",
+    "#utils": "./utils/index.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "yaml": "^2.3.4",
+    "https-proxy-agent": "^7.0.2",
+    "node-schedule": "^2.1.1"
+  }
+}

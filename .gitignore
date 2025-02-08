@@ -1,0 +1,9 @@
+test
+**/test.js
+**/test.ts
+node_modules
+config/config.yaml
+data
+data.db
+temp
+config/mcsconfig.yaml

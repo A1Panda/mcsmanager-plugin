@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCSManager 实例列表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #f5f6fa;
+            padding: 20px;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #34495e;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .page-info {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .instance-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .instance-number {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 24px;
+            height: 24px;
+            background: #34495e;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .instance-card {
+            position: relative;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .instance-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .instance-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+        }
+
+        .instance-title {
+            flex: 1;
+        }
+
+        .instance-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .instance-id {
+            font-size: 12px;
+            color: #95a5a6;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .info-label {
+            color: #7f8c8d;
+            margin-right: 10px;
+            font-size: 14px;
+            min-width: 70px;
+        }
+
+        .info-value {
+            color: #34495e;
+            font-size: 14px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: white;
+            background: #95a5a6;  /* 默认颜色 */
+        }
+
+        .status-running {  /* 运行中 */
+            background: #27ae60;
+        }
+
+        .status-stopped {  /* 已停止 */
+            background: #c0392b;
+        }
+
+        .status-starting {  /* 启动中 */
+            background: #f39c12;
+        }
+
+        .status-stopping {  /* 停止中 */
+            background: #d35400;
+        }
+
+        .status-busy {  /* 忙碌 */
+            background: #8e44ad;
+        }
+
+        .instance-type-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: white;
+            background: #3498db;
+        }
+
+        .type-minecraft {
+            background: #27ae60;
+        }
+
+        .type-steam {
+            background: #8e44ad;
+        }
+
+        .type-universal {
+            background: #3498db;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #95a5a6;
+            font-size: 12px;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MCSManager 实例列表</h1>
+            <div class="page-info">第 <%=page%>/<%=maxPage%> 页，共 <%=total%> 个实例</div>
+        </div>
+
+        <div class="instance-list">
+            <% for(let inst of instances){ %>
+            <div class="instance-card">
+                <div class="instance-number"><%=instances.indexOf(inst) + 1%></div>
+                <div class="instance-header">
+                    <div class="instance-icon">
+                        <%= inst.type.startsWith('minecraft') ? '⛏️' : 
+                            inst.type.startsWith('steam') ? '🎮' : '📦' %>
+                    </div>
+                    <div class="instance-title">
+                        <div class="instance-name"><%=inst.name%></div>
+                        <div class="instance-id">ID: <%=inst.uuid%></div>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">类型</div>
+                        <div class="info-value">
+                            <span class="instance-type-badge type-<%=
+                                inst.type.startsWith('minecraft') ? 'minecraft' : 
+                                inst.type.startsWith('steam') ? 'steam' : 'universal'
+                            %>">
+                                <%=inst.type%>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">状态</div>
+                        <div class="info-value">
+                            <span class="status-badge <%=
+                                inst.state === 3 ? 'status-running' : 
+                                inst.state === 2 ? 'status-starting' :
+                                inst.state === 1 ? 'status-stopping' :
+                                inst.state === -1 ? 'status-busy' : 'status-stopped'
+                            %>">
+                                <%=inst.stateName%>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">启动次数</div>
+                        <div class="info-value"><%=inst.started%> 次</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">自动启动</div>
+                        <div class="info-value"><%=inst.autoStart ? '是' : '否'%></div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+
+        <div class="pagination">
+            共 <%=total%> 个实例，每页 <%=pageSize%> 条
+        </div>
+
+        <div class="footer">
+            Generated by Yunzai-Bot MCSManager Plugin
+        </div>
+    </div>
+</body>
+</html>

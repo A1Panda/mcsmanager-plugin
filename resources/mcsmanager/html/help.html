@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            background: #f5f5f5;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        .container {
+            padding: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .version {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .commands {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .command-group {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        .group-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #4a90e2;
+        }
+        .command-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .command-item {
+            font-size: 14px;
+            color: #333;
+        }
+        .command-name {
+            font-weight: bold;
+            color: #4a90e2;
+        }
+        .command-desc {
+            color: #666;
+            margin-top: 2px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">MCSManager 帮助</div>
+            <div class="version">作者 A1_Panda</div>
+        </div>
+        <div class="commands">
+            <div class="command-group">
+                <div class="group-title">账号管理</div>
+                <div class="command-list">
+                    <div class="command-item">
+                        <div class="command-name">#mcs绑定 URL API密钥</div>
+                        <div class="command-desc">绑定MCSManager面板</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs解绑</div>
+                        <div class="command-desc">解除面板绑定</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs绑定信息</div>
+                        <div class="command-desc">查看账号绑定信息</div>
+                    </div>
+                </div>
+            </div>
+            <div class="command-group">
+                <div class="group-title">面板管理</div>
+                <div class="command-list">
+                    <div class="command-item">
+                        <div class="command-name">#mcs概览</div>
+                        <div class="command-desc">查看面板概览信息</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs用户列表 [页码]</div>
+                        <div class="command-desc">查看用户列表</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs创建用户 <用户名> <密码> <权限级别></div>
+                        <div class="command-desc">创建新用户</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs删除用户 <用户名> <用户ID></div>
+                        <div class="command-desc">删除指定用户</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs修改权限 <用户名> <新权限级别></div>
+                        <div class="command-desc">修改用户权限</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs重置密码 <用户名> <新密码></div>
+                        <div class="command-desc">重置用户密码</div>
+                    </div>
+                </div>
+            </div>
+            <div class="command-group">
+                <div class="group-title">实例管理</div>
+                <div class="command-list">
+                    <div class="command-item">
+                        <div class="command-name">#mcs同步实例</div>
+                        <div class="command-desc">更新实例列表</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs实例列表</div>
+                        <div class="command-desc">查看所有实例</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs实例信息 ID [页码]</div>
+                        <div class="command-desc">查看实例详情</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs启动/停止/重启/强制结束 ID</div>
+                        <div class="command-desc">控制实例状态</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs日志 ID 数据量KB</div>
+                        <div class="command-desc">查看实例日志</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs命令 ID</div>
+                        <div class="command-desc">发送控制台命令</div>
+                    </div>
+                </div>
+            </div>
+            <div class="command-group">
+                <div class="group-title">文件管理</div>
+                <div class="command-list">
+                    <div class="command-item">
+                        <div class="command-name">#mcs文件列表 <实例ID> [路径]</div>
+                        <div class="command-desc">查看实例文件列表</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs下载文件 <实例ID> [路径]</div>
+                        <div class="command-desc">下载实例文件</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs上传文件 <实例ID> [路径]</div>
+                        <div class="command-desc">上传实例文件</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs删除文件 <实例ID> [路径]</div>
+                        <div class="command-desc">删除实例文件</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs重命名文件 <实例ID> [路径] <新名称></div>
+                        <div class="command-desc">重命名实例文件</div>
+                    </div>
+                </div>
+            </div>
+            <div class="command-group">
+                <div class="group-title">节点管理</div>
+                <div class="command-list">
+                    <div class="command-item">
+                        <div class="command-name">#mcs节点列表</div>
+                        <div class="command-desc">查看所有节点</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs添加节点 IP 端口 API密钥 [备注]</div>
+                        <div class="command-desc">添加新节点</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs删除节点 ID</div>
+                        <div class="command-desc">删除指定节点</div>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-name">#mcs连接节点 ID</div>
+                        <div class="command-desc">连接指定节点</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px; padding: 10px; background: #fff3cd; color: #856404; border-radius: 5px;">
+            注意：必须使用MCSManager的管理员账户，并且必须手动分配实例给该管理员账户
+        </div>
+    </div>
+</body>
+</html> 
