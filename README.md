@@ -39,15 +39,15 @@
 
 ```bash
 # 使用 Github
-git clone https://github.com/A1Panda/mcsmanager-plugin.git ./plugins/mctool-plugin/
+git clone https://github.com/A1Panda/mcsmanager-plugin.git ./plugins/mcsmanager-plugin/
 
 # 或使用 Gitee
-git clone https://gitee.com/A1Panda/mcsmanager-plugin.git ./plugins/mctool-plugin/
+git clone https://gitee.com/A1Panda/mcsmanager-plugin.git ./plugins/mcsmanager-plugin/
 ```
 
 2. 安装依赖：
 ```bash
-cd ./plugins/mctool-plugin
+cd ./plugins/mcsmanager-plugin
 pnpm install
 ```
 
