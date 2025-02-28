@@ -107,7 +107,7 @@ pnpm install
 
 ## ⚠️ 注意事项
 
-1. MCManager 相关功能必须使用管理账户的 API Key
+1. MCSManager 相关功能必须使用管理账户的 API Key
 2. 管理账户需要单独设置授权管理的实例
 3. 请妥善保管 API Key，避免泄露
 4. 请勿滥用管理账户，避免造成不必要的麻烦
